@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title> Cupcakes </title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center display-3"> Cupcakes </h1>
+
+        <!-- Add a cupcake button/form -->
+        <button type="button" class="btn btn-primary" id="show-form-button"> Add Cupcake </button>
+        <div class="container">
+            <form id="cupcake-form">
+                <div class="form-group">
+                    <label for="flavor"> Flavor: </label>
+                    <input type="text" 
+                           class="form-control"
+                           id="flavor"
+                           name="flavor"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="size"> Size: </label>
+                    <input type="text" 
+                           class="form-control"
+                           id="size"
+                           name="size"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="rating"> Rating: </label>
+                    <input type="text" 
+                           class="form-control"
+                           id="rating"
+                           name="rating"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="image"> Image URL: </label>
+                    <input type="text" 
+                           class="form-control"
+                           id="image"
+                           name="image"
+                           required>
+                </div>
+                <button type="submit" id="save-cupcake-button" class="btn btn-success">Save Cupcake</button>
+            </form>
+        <!-- Display cupcake List -->
+        <br>
+        <div class="row" id="cupcakes-list">
+            {% for cupcake in cupcakes %}
+            <div class="col-4 mb-4">
+                <div class="card">
+                    <img src="{{ cupcake.image }}" 
+                         class="card-img-top" 
+                         alt="default_pic" 
+                         style="max-width: 200px; max-height: 250px;">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ cupcake.flavor }}</h5>
+                        <p class="card-text"> Rating: {{ cupcake.rating }} </p>
+                        <p class="card-text"> Size: {{ cupcake.size }} </p>
+                        <button class="btn btn-danger delete-button" 
+                                data-id="{{ cupcake.id }}"> X 
+                        </button>
+                    </div>    
+                </div>
+            </div>
+            {% if loop.index % 3 == 0 %}</div><div class="row">{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="static/cupcakes.js"></script>
+</body>
+</html>
